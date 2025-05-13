@@ -1,6 +1,6 @@
 {
   "name": "@getyoti/share-client-react",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "author": "Yoti LTD <tech@yoti.com> (https://www.yoti.com/developers)",
   "license": "MIT",
   "repository": {
@@ -21,7 +21,7 @@
     "prepack": "npm run build"
   },
   "dependencies": {
-    "@getyoti/share-client-core": "0.0.1-alpha.0"
+    "@getyoti/share-client-core": "^0.0.1-alpha.1"
   },
   "peerDependencies": {
     "react": "^19.0.0",
