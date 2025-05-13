@@ -1,5 +1,7 @@
 # share-client - React
 
 ```typescript
-import { createBob, getBobs } from '@getyoti/share-client-react'
+import { Tada, Button } from '@getyoti/share-client-react'
 ```
+
+More
