@@ -1,0 +1,28 @@
+{
+  "name": "@getyoti/share-client-core",
+  "version": "0.0.0",
+  "author": "Yoti LTD <tech@yoti.com> (https://www.yoti.com/developers)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getyoti/share-client.git"
+  },
+  "type": "module",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --p ./tsconfig.build.json && vite build",
+    "preview": "vite preview",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.46",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vite-plugin-dts": "4.5.3"
+  }
+}
