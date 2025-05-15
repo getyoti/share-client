@@ -16,5 +16,8 @@ export default defineConfig({
       name: '@getyoti/share-client-react',
       fileName: 'main',
     },
+    rollupOptions:{
+      external: ['react', 'react/jsx-runtime'],
+    }
   },
 })
