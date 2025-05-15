@@ -11,7 +11,6 @@ export default defineConfig({
     }),
   ],
   build: {
-    copyPublicDir: false,
     lib: {
       entry: resolve('', 'lib/main.ts'),
       name: '@getyoti/share-client-react',
