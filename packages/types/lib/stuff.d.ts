@@ -10,5 +10,6 @@ declare namespace Stuff {
   type Bit = {
     secret: Shhh
     shh: boolean
+    more: number
   }
 }
