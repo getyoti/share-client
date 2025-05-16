@@ -20,9 +20,12 @@
     "build:analyse": "analyze",
     "preview": "vite preview",
     "prepack": "npm run build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc"
   },
   "devDependencies": {
+    "@getyoti/share-client-lint-config": "*",
     "@types/node": "20.17.46",
     "jsdom": "26.1.0",
     "typescript": "5.8.3",

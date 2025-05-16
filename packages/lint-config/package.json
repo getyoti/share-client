@@ -1,0 +1,23 @@
+{
+  "name": "@getyoti/share-client-lint-config",
+  "private": "true",
+  "version": "0.0.1-alpha.6",
+  "author": "Yoti LTD <tech@yoti.com> (https://www.yoti.com/developers)",
+  "type": "module",
+  "main": "src/index.mjs",
+  "dependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/node": "20.17.46",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@typescript-eslint/parser": "^8.32.1",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-import-resolver-typescript": "4.3.4",
+    "globals": "^16.0.0",
+    "typescript": "5.8.3",
+    "typescript-eslint": "^8.30.1"
+  }
+}

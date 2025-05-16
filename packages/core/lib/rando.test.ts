@@ -1,4 +1,5 @@
 import { expect, test, vi } from 'vitest'
+
 import { createRando } from './rando'
 
 test('calling createRando()', () => {
