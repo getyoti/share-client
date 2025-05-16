@@ -1,5 +1,3 @@
-/// <reference types="@getyoti/share-client-types" />
-
 export type Rando = { secret: Stuff.Shhh }
 
 export function createRando(): Rando {
