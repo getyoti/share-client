@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/getyoti/share-client.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "types": "lib/main.d.ts",
   "main": "lib/main.d.ts",
