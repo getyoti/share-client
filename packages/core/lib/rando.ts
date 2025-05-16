@@ -1,7 +1,9 @@
-export type Rando = { secret: { message: string } }
+/// <reference types="@getyoti/share-client-types" />
+
+export type Rando = { secret: Stuff.Shhh }
 
 export function createRando(): Rando {
-  let secret = { message: 'Default' }
+  let secret: Stuff.Shhh = { message: 'default is quiet' }
   if (typeof window !== 'undefined') {
     secret = window.Yoyo?.Titi.getSecret() || secret
   }

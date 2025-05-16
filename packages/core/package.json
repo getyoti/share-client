@@ -24,6 +24,9 @@
     "lint": "eslint .",
     "typecheck": "tsc"
   },
+  "dependencies": {
+    "@getyoti/share-client-types": "0.0.1-alpha.7"
+  },
   "devDependencies": {
     "@getyoti/share-client-lint-config": "*",
     "@types/node": "20.17.46",

@@ -7,11 +7,11 @@ test('calling createRando()', () => {
     Yoyo: {
       Titi: {
         getSecret: vi.fn().mockImplementation(() => {
-          return 'test'
+          return { message: 'this is a test' }
         }),
       },
     },
   })
-  expect(createRando()).toStrictEqual({ secret: 'test' })
+  expect(createRando()).toStrictEqual({ secret: { message: 'this is a test' } })
   expect(window.Yoyo?.Titi.getSecret).toHaveBeenCalled()
 })
