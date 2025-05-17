@@ -12,7 +12,7 @@ export default tseslint.config(
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
     ],
-    files: ['**/*.{ts}'],
+    files: ['**/*.{js,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -23,19 +23,17 @@ export default tseslint.config(
         'error',
         {
           groups: [
-            'builtin', // Built-in imports (come from NodeJS native) go first
-            'external', // <- External imports
-            'internal', // <- Absolute imports
-            ['sibling', 'parent'], // <- Relative imports, the sibling and parent types they can be mingled together
-            'index', // <- index imports
-            'unknown', // <- unknown
+            'builtin',
+            'external',
+            'internal',
+            ['sibling', 'parent'],
+            'index',
+            'unknown',
           ],
           'newlines-between': 'always',
-          alphabetize: {
-            /* sort in ascending order. Options: ["ignore", "asc", "desc"] */
-            order: 'asc',
-            /* ignore case. Options: [true, false] */
-            caseInsensitive: true,
+          'named': {
+            enabled: true,
+            types: "types-first"
           },
         },
       ],

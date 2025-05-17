@@ -1,6 +1,6 @@
 {
   "name": "@getyoti/share-client-react",
-  "version": "0.0.1-alpha.10",
+  "version": "0.0.1-beta.1",
   "author": "Yoti LTD <tech@yoti.com> (https://www.yoti.com/developers)",
   "license": "MIT",
   "repository": {
@@ -21,13 +21,14 @@
     "dev": "vite",
     "build": "tsc --p ./tsconfig.build.json && vite build",
     "build:analyse": "analyze",
-    "preview": "vite preview",
     "prepack": "npm run build",
     "lint": "eslint .",
-    "typecheck": "tsc"
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
-    "@getyoti/share-client-core": "^0.0.1-alpha.10"
+    "@getyoti/share-client-core": "^0.0.1-beta.1"
   },
   "peerDependencies": {
     "react": "^18.0.0",
@@ -39,9 +40,17 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
+    "lint-staged": "16.0.0",
     "typescript": "5.8.3",
     "vite": "6.3.5",
     "vite-bundle-analyzer": "0.20.2",
     "vite-plugin-dts": "4.5.3"
+  },
+  "lint-staged": {
+    "*.{md,json}": "prettier --write",
+    "*.{ts,tsx,js,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

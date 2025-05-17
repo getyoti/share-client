@@ -1,9 +1,9 @@
-/// <reference path="./stuff.d.ts" />
+/// <reference path="./yoti.share.d.ts" />
 
 interface Window {
-  Yoyo?: {
-    Titi: {
-      getSecret: () => Stuff.Shhh
+  Yoti?: {
+    Share: {
+      init: (config: YotiShare.Config) => Promise<YotiShare.ShareInstance>
     }
   }
 }

@@ -1,4 +1,4 @@
-import { createBob, getBobs } from '../lib/main.ts'
+import { startYotiModalShare } from '../lib/main'
 
 import './style.css'
 
@@ -6,26 +6,51 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <h1>Welcome!</h1>
     <div class="card">
-      <button id="counter" type="button">Add a bob</button>
-      <pre id="content"></pre>
+      <button id="start-btn" type="button">Start Share!</button>
+      <div id="share-div" style="visibility: hidden" />
     </div>
   </div>
 `
 
-function setup(button: HTMLButtonElement, paragraph: HTMLParagraphElement) {
-  const updateDisplay = () => {
-    const bobs = getBobs()
-    paragraph.innerHTML =
-      `There are ${bobs.length} bobs!\n` + bobs.map((bob) => JSON.stringify(bob)).join('\n')
-  }
+const button = document.querySelector<HTMLButtonElement>('#start-btn')!
+const shareContainer = document.querySelector<HTMLDivElement>('#share-div')!
 
-  button.addEventListener('click', () => {
-    createBob()
-    updateDisplay()
+const removeButton = () => {
+  button.parentNode?.removeChild(button)
+}
+
+const showShareContainer = () => {
+  shareContainer.style.visibility = 'visible'
+}
+
+const start = async () => {
+  const SDK_ID = '60f98bf7-0da7-4484-aa64-5a753dd502e0'
+  const DOM_ID = 'share-div'
+  // const SCENARIO_ID = '3f7158bc-4554-47d9-ade6-f35e3fbb4bf2'
+
+  await startYotiModalShare({
+    clientSdkId: SDK_ID,
+    domId: DOM_ID,
+    controls: {
+      // scenarioId: SCENARIO_ID,
+      shareUrlProvider: () => Promise.resolve('https://code.yoti.com/lakdjalskdj'),
+      useMobileReturningFlow: true,
+    },
+    options: {
+      skinId: 'yoti',
+      button: {
+        align: 'left',
+      },
+    },
   })
 }
 
-setup(
-  document.querySelector<HTMLButtonElement>('#counter')!,
-  document.querySelector<HTMLParagraphElement>('#content')!,
-)
+function setup() {
+  button.addEventListener('click', () => {
+    removeButton()
+    showShareContainer()
+    start().catch(console.error)
+  })
+}
+
+setup()

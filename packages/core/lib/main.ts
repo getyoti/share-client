@@ -1,19 +1,21 @@
-import { createRando, type Rando } from './rando'
-type Bob = { id: number; bobby: string; rando: Rando }
+import {
+  type CreateModalParams,
+  type CreateInlineParams,
+  createInlineElement,
+  createModalElement,
+} from './create.ts'
+import { loadClient } from './loader'
 
-const bobs: Bob[] = []
+export { loadClient } from './loader'
 
-export function getBob(id: number) {
-  return bobs.find((bob) => bob.id === id)
+export const startYotiModalShare = async (params: CreateModalParams) => {
+  await loadClient()
+  const element = createModalElement(params)
+  return window.Yoti?.Share.init({ elements: [element] })
 }
 
-export function getBobs() {
-  return [...bobs]
-}
-
-export function createBob() {
-  const newBob = { id: Date.now(), bobby: 'ok', rando: createRando() }
-  bobs.push(newBob)
-  console.log(`created new Bob:`, newBob)
-  return newBob
+export const startYotiInlineShare = async (params: CreateInlineParams) => {
+  await loadClient()
+  const element = createInlineElement(params)
+  return window.Yoti?.Share.init({ elements: [element] })
 }

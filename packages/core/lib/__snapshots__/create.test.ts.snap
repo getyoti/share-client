@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`calling createInlineElement() - basic 1`] = `
+{
+  "button": {
+    "align": "center",
+    "verticalAlign": "middle",
+    "width": "auto",
+  },
+  "clientSdkId": "asd",
+  "displayLearnMoreLink": undefined,
+  "domId": "asd",
+  "scenarioId": "asd",
+  "shareComplete": {
+    "mobileFlow": "internal",
+    "tokenHandler": undefined,
+  },
+  "skinId": undefined,
+  "type": "inline",
+}
+`;
+
+exports[`calling createModalElement() - basic 1`] = `
+{
+  "button": undefined,
+  "clientSdkId": "asd",
+  "displayLearnMoreLink": undefined,
+  "domId": "asd",
+  "scenarioId": "asd",
+  "shareComplete": {
+    "mobileFlow": "internal",
+    "tokenHandler": undefined,
+  },
+  "skinId": undefined,
+  "type": "modal",
+}
+`;

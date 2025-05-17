@@ -1,2 +1,2 @@
-export { Button } from './components/Button'
-export { Tada } from './components/Tada'
+export { InlineYotiShare, InlineYotiShareWithScenario } from './components/InlineYotiShare'
+export { ModalYotiShare, ModalYotiShareWithScenario } from './components/ModalYotiShare'

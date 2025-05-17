@@ -2,23 +2,45 @@ import { expect, test, vi } from 'vitest'
 
 test('just a file to test Typescript with compiler ', () => {
   vi.stubGlobal('window', {
-    Yoyo: {
-      Titi: {
-        getSecret: vi.fn().mockImplementation(() => {
+    Yoti: {
+      Share: {
+        init: vi.fn().mockImplementation(() => {
           return 'test'
         }),
       },
     },
   })
 
-  const aThing:Stuff.Thing = {one:'asd', orTwo: "13"}
-  const secret: Stuff.Shhh = {message: 'asdsd'};
-  const anIt:Stuff.Bit = {secret: secret, shh: true}
+  const config: YotiShare.Config = {
+    elements: [
+      {
+        clientSdkId: 'testClientSdkId',
+        domId: 'testDomId',
+        scenarioId: 'testScenarioId',
+        type: 'modal',
+        skinId: 'digital-id-uk',
+        displayLearnMoreLink: false,
+        button: {
+          align: 'center',
+          verticalAlign: 'middle',
+          width: 'auto',
+        },
+        modal: {
+          zIndex: 2,
+        },
+        shareComplete: {
+          closeDelay: 500,
+          tokenHandler: (token: string) => Promise.resolve(token),
+          mobileFlow: 'external',
+        },
+        shareUrlProvider: () => Promise.resolve('https://code.yoti.com/46ews'),
+      },
+    ],
+  }
 
-  expect(aThing).toBeDefined
-  expect(anIt).toBeDefined
+  expect(config).toBeDefined
 
-  const result= window.Yoyo?.Titi.getSecret()
+  const result = window.Yoti?.Share.init(config)
   expect(result).toBe('test')
-  expect(window.Yoyo?.Titi.getSecret).toHaveBeenCalled()
+  expect(window.Yoti?.Share.init).toHaveBeenCalled()
 })
