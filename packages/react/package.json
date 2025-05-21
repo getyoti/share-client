@@ -1,6 +1,6 @@
 {
   "name": "@getyoti/share-client-react",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "author": "Yoti LTD <tech@yoti.com> (https://www.yoti.com/developers)",
   "license": "MIT",
   "repository": {
@@ -28,14 +28,14 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
-    "@getyoti/share-client-core": "^0.0.1-beta.1"
+    "@getyoti/share-client-core": "^0.0.1-beta.2"
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@getyoti/share-client-lint-config": "*",
+    "@getyoti/share-client-lint-config": "^0.0.1-beta.2",
     "@types/node": "20.17.46",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",

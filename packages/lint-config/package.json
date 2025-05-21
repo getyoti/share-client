@@ -1,7 +1,7 @@
 {
   "name": "@getyoti/share-client-lint-config",
   "private": "true",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.2",
   "author": "Yoti LTD <tech@yoti.com> (https://www.yoti.com/developers)",
   "type": "module",
   "main": "src/index.mjs",
