@@ -1,7 +1,16 @@
 # share-client - React
 
-```typescript
-import { Tada, Button } from '@getyoti/share-client-react'
+> ⚠️\*Are you set up with Yoti?\*\*  
+> Please make sure you have read the [quick introduction](../../README.md)
+
+### Get started
+
+Install the package
+
+```shell
+npm i @getyoti/share-client-react
 ```
 
-More
+Ready to use!
+
+TODO: add the rest
