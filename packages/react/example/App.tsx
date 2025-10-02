@@ -42,28 +42,28 @@ function App() {
         <InlineYotiShare
           sdkId={SDK_ID}
           onShareUrlAwaited={dummyShareUrlProvider}
-          skinId="yoti-with-post-office"
+          skinId="digital-id-uk"
         />
       )}
       {yotiShareExample === 'inline-scenario' && (
         <InlineYotiShareWithScenario
           sdkId={SDK_ID}
           scenarioId={SCENARIO_ID}
-          skinId="yoti-with-post-office"
+          skinId="yoti"
         />
       )}
       {yotiShareExample === 'modal' && (
         <ModalYotiShare
           sdkId={SDK_ID}
           onShareUrlAwaited={dummyShareUrlProvider}
-          skinId="yoti-with-post-office"
+          skinId="digital-id-uk"
         />
       )}
       {yotiShareExample === 'modal-scenario' && (
         <ModalYotiShareWithScenario
           sdkId={SDK_ID}
           scenarioId={SCENARIO_ID}
-          skinId="yoti-with-post-office"
+          skinId="yoti"
         />
       )}
     </>

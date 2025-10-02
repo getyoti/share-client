@@ -16,13 +16,14 @@
     "typecheck": "lerna run typecheck",
     "pretty": "prettier --check .",
     "pretty:fix": "npx prettier --write .",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "pre-commit": "npm run lint-staged && npm run typecheck",
-    "pre-push": "npm run test"
+    "pre-push": "npm run test",
+    "pack": "lerna pack"
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lerna": "8.2.2",
+    "lerna": "8.2.4",
     "prettier": "3.5.3"
   }
 }
