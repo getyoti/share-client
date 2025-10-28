@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest'
 
-test('just a file to test Typescript with compiler ', () => {
+test('just a file to test Typescript with compiler', async () => {
   vi.stubGlobal('window', {
     Yoti: {
       Share: {
@@ -8,39 +8,42 @@ test('just a file to test Typescript with compiler ', () => {
           return 'test'
         }),
       },
+      ready: vi.fn().mockImplementation(() => true),
+      createWebShare: vi.fn().mockImplementation(() => ({ domId: 'something' })),
     },
   })
 
-  const config: YotiShare.Config = {
-    elements: [
-      {
-        clientSdkId: 'testClientSdkId',
-        domId: 'testDomId',
-        scenarioId: 'testScenarioId',
-        type: 'modal',
-        skinId: 'digital-id-uk',
-        displayLearnMoreLink: false,
-        button: {
-          align: 'center',
-          verticalAlign: 'middle',
-          width: 'auto',
-        },
-        modal: {
-          zIndex: 2,
-        },
-        shareComplete: {
-          closeDelay: 500,
-          tokenHandler: (token: string) => Promise.resolve(token),
-          mobileFlow: 'external',
-        },
-        shareUrlProvider: () => Promise.resolve('https://code.yoti.com/46ews'),
-      },
-    ],
+  const config: YotiWebShare.WebShareProps = {
+    sdkId: 'testClientSdkId',
+    domId: 'testDomId',
+    skinId: 'digital-id-uk',
+    name: 'test',
+    flow: {
+      desktop: 'REVEAL_MODAL_QR_CODE',
+      mobile: 'REVEAL_MODAL_APP_BUTTON',
+    },
+    presentation: {
+      alignment: 'center',
+    },
+    hooks: {
+      sessionIdResolver: () => Promise.resolve('13'),
+      completionHandler: console.log,
+    },
   }
 
   expect(config).toBeDefined
 
-  const result = window.Yoti?.Share.init(config)
-  expect(result).toBe('test')
-  expect(window.Yoti?.Share.init).toHaveBeenCalled()
+  await window.Yoti?.ready()
+  const Yoti = window.Yoti!
+  const result = await Yoti.createWebShare(config)
+  expect(result).toMatchObject({ domId: 'something' })
+  expect(Yoti.createWebShare).toHaveBeenCalled()
+  const {
+    domId,
+    // reveal,
+    // error,
+    // name,
+    // destroy,
+  } = result
+  expect(domId).toBe('something')
 })

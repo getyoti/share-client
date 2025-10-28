@@ -22,18 +22,11 @@ export default tseslint.config(
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            ['sibling', 'parent'],
-            'index',
-            'unknown',
-          ],
+          groups: ['builtin', 'external', 'internal', ['sibling', 'parent'], 'index', 'unknown'],
           'newlines-between': 'always',
-          'named': {
+          named: {
             enabled: true,
-            types: "types-first"
+            types: 'types-first',
           },
         },
       ],

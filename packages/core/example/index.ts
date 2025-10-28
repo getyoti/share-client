@@ -1,19 +1,21 @@
-import { startYotiModalShare } from '../lib/main'
+import { createYotiWebShare } from '../lib/main'
 
 import './style.css'
+
+window.__YOTI_SHARE_CLIENT_URL = 'https://www.public.stg1.dmz.yoti.com/share/client/v2'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <h1>Welcome!</h1>
     <div class="card">
       <button id="start-btn" type="button">Start Share!</button>
-      <div id="share-div" style="visibility: hidden" />
+      <div id="webshare-div" style="visibility: hidden" />
     </div>
   </div>
 `
 
 const button = document.querySelector<HTMLButtonElement>('#start-btn')!
-const shareContainer = document.querySelector<HTMLDivElement>('#share-div')!
+const shareContainer = document.querySelector<HTMLDivElement>('#webshare-div')!
 
 const removeButton = () => {
   button.parentNode?.removeChild(button)
@@ -25,22 +27,14 @@ const showShareContainer = () => {
 
 const start = async () => {
   const SDK_ID = '60f98bf7-0da7-4484-aa64-5a753dd502e0'
-  const DOM_ID = 'share-div'
-  // const SCENARIO_ID = '3f7158bc-4554-47d9-ade6-f35e3fbb4bf2'
+  const DOM_ID = 'webshare-div'
 
-  await startYotiModalShare({
-    clientSdkId: SDK_ID,
+  await createYotiWebShare({
+    name: 'demo',
+    sdkId: SDK_ID,
     domId: DOM_ID,
-    controls: {
-      // scenarioId: SCENARIO_ID,
-      shareUrlProvider: () => Promise.resolve('https://code.yoti.com/lakdjalskdj'),
-      useMobileReturningFlow: true,
-    },
-    options: {
-      skinId: 'yoti',
-      button: {
-        align: 'left',
-      },
+    hooks: {
+      sessionIdResolver: () => Promise.resolve('some-session-id'),
     },
   })
 }

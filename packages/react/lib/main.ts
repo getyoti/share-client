@@ -1,2 +1,2 @@
-export { InlineYotiShare, InlineYotiShareWithScenario } from './components/InlineYotiShare'
-export { ModalYotiShare, ModalYotiShareWithScenario } from './components/ModalYotiShare'
+export { default as YWSProvider } from './contexts/YotiWebShareProvider'
+export * from './components'

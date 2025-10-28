@@ -11,46 +11,39 @@ Install the package
 npm i @getyoti/share-client-types
 ```
 
-Ready to use!  
+Ready to use!
 
-Simply add the typescript reference as shown below, and you can then benefit from the typing completion. 
+Simply add the typescript reference as shown below, and you can then benefit from the typing completion.
 
 ```typescript
 // your-file.ts - or a global.d.ts
 
-// Add the reference 
+// Add the reference
 /// <reference types="@getyoti/share-client-types" />
 
 
-const config: YotiWebShare.Config = {
-  elements: [
-    {
-      clientSdkId: 'testClientSdkId',
-      domId: 'testDomId',
-      type: 'modal',
-      skinId: 'digital-id-uk',
-      displayLearnMoreLink: false,
-      button: {
-        align: 'center',
-        verticalAlign: 'middle',
-        width: 'auto',
-      },
-      modal: {
-        zIndex: 2,
-      },
-      shareComplete: {
-        closeDelay: 500,
-        tokenHandler: (token: string) => Promise.resolve(token),
-        mobileFlow: 'external',
-      },
-
-      // Choose either the share url mode by setting a 'shareUrlProvider' method that returns Yoti share urls created on your server
-      shareUrlProvider: () => Promise.resolve('https://code.yoti.com/46ews'),
-      // or use the scenario mode by providing a 'scenarioId'
-      scenarioId: 'testScenarioId',
-    },
-  ],
+const config: YotiWebShare.WebShareProps = {
+  sdkId: 'testClientSdkId',
+  domId: 'testDomId',
+  skinId: 'digital-id-uk',
+  name: 'test',
+  flow: {
+    desktop: 'REVEAL_MODAL_QR_CODE',
+    mobile: 'REVEAL_MODAL_APP_BUTTON',
+  },
+  presentation: {
+    alignment: 'center',
+  },
+  hooks: {
+    sessionIdResolver: () => Promise.resolve('some-session-id'),
+    completionHandler: (receiptId) => {},
+  },
 }
 
-window.Yoti?.Share.init(config)
+await window.Yoti?.ready()
+const Yoti = window.Yoti!
+const instance = await Yoti.createWebShare(config)
+
+// Call destroy when done with the WebShare instance
+// instance.destroy()
 ```

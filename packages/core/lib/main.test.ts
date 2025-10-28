@@ -1,67 +1,69 @@
 import { describe, expect, test, vi } from 'vitest'
 
-import { createInlineElement, createModalElement } from './create'
 import { loadClient } from './loader'
-import { loadClient as exportedLoadClient, startYotiInlineShare, startYotiModalShare } from './main'
+import { createYotiWebShare, getYotiClient } from './main'
 
 vi.mock('./loader')
-vi.mock('./create')
 
-vi.stubGlobal('window', {
-  Yoti: {
-    Share: {
-      init: vi.fn(),
-    },
-  },
-})
+// vi.stubGlobal('window', {
+//   Yoti: {
+//     ready: vi.fn().mockImplementation(()=> Promise.resolve(true)),
+//     createWebShare: vi.fn().mockImplementation(()=> Promise.resolve({some: 'instance'})),
+//   },
+// })
 
-const Yoti = window.Yoti!
-
-test('it exports loadClient()', async () => {
-  expect(exportedLoadClient).toBe(loadClient)
-})
+// const Yoti = window.Yoti!
 
 const SDK_ID = 'client-sdk-id'
 const DOM_ID = 'some-dom-id'
-const SCENARIO_ID = 'scenario-id'
 
-const mockedModalElement = {
-  clientSdkId: SDK_ID,
-  domId: DOM_ID,
-  type: 'modal',
-} as YotiShare.ConfigElement
-vi.mocked(createModalElement).mockReturnValue(mockedModalElement)
+// const mockedClient: YotiWebShare.Client = {
+//   ready: vi.fn().mockImplementation(()=> Promise.resolve(true)),
+//   createWebShare: vi.fn().mockImplementation(()=> Promise.resolve({some: 'instance'})),
+//   getWebShareByDomId: vi.fn(),
+//   getWebShareByName: vi.fn(),
+//   getDetectedDeviceType: vi.fn()
+// }
 
-describe('it exports startYotiModalShare()', async () => {
-  test('that orchestrates loadClient() >> createModalElement() >> Yoti.Share.init()', async () => {
-    const params = {
-      clientSdkId: SDK_ID,
-      domId: DOM_ID,
-      controls: {
-        scenarioId: SCENARIO_ID,
-      },
-    }
-    await startYotiModalShare(params)
+describe('it exports methods', () => {
+  describe('getYotiWebShareClient()', () => {
+    test('that returns loadClient', async () => {
+      const mockedClient: YotiWebShare.Client = {
+        mocked: 'client',
+      } as unknown as YotiWebShare.Client
 
-    expect(loadClient).toHaveBeenCalled()
-    expect(createModalElement).toHaveBeenCalledWith(params)
-    expect(Yoti.Share.init).toHaveBeenCalledWith({ elements: [mockedModalElement] })
+      vi.mocked(loadClient).mockResolvedValue(mockedClient)
+
+      const client = await getYotiClient()
+
+      expect(loadClient).toHaveBeenCalled()
+      expect(client).toEqual(mockedClient)
+      // expect(Yoti.ready).toHaveBeenCalled()
+      // expect(Yoti.createWebShare).toHaveBeenCalledWith(props)
+    })
   })
-})
 
-describe('it exports startYotiInlineShare()', async () => {
-  test('that orchestrates loadClient() >> createInlineElement() >> Yoti.Share.init()', async () => {
-    const params = {
-      clientSdkId: SDK_ID,
-      domId: DOM_ID,
-      controls: {
-        scenarioId: SCENARIO_ID,
-      },
-    }
-    await startYotiInlineShare(params)
+  describe('createYotiWebShare(props)', () => {
+    test('that orchestrates loadClient() >> Yoti.createWebShare(props)', async () => {
+      const mockedClient: YotiWebShare.Client = {
+        mocked: 'client',
+        createWebShare: vi.fn().mockImplementation(() => Promise.resolve({ some: 'instance' })),
+      } as unknown as YotiWebShare.Client
 
-    expect(loadClient).toHaveBeenCalled()
-    expect(createInlineElement).toHaveBeenCalledWith(params)
-    expect(Yoti.Share.init).toHaveBeenCalledWith({ elements: [mockedModalElement] })
+      vi.mocked(loadClient).mockResolvedValue(mockedClient)
+
+      const props = {
+        name: 'test',
+        domId: DOM_ID,
+        sdkId: SDK_ID,
+        hooks: {
+          sessionIdResolver: () => Promise.resolve('123'),
+        },
+      }
+      await createYotiWebShare(props)
+
+      expect(loadClient).toHaveBeenCalled()
+      expect(mockedClient.createWebShare).toHaveBeenCalledWith(props)
+    })
   })
 })

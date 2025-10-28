@@ -1,1 +1,1 @@
-/// <reference types="@getyoti/share-client-types" />
+/// <reference types="@getyoti/share-client-core" />

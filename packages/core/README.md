@@ -14,26 +14,18 @@ npm i @getyoti/share-client-core
 Ready to use! Simply pass your `SDK_ID`, the `DOM` identifier of the html container, and specify the controls and options.
 
 ```typescript
-import { startYotiModalShare } from '@getyoti/share-client-core'
+import { createYotiWebShare } from '@getyoti/share-client-core'
 
 const SDK_ID = '60f98bf7-0da7-4484-aa64-5a753dd502e0'
 const DOM_ID = 'share-div'
 
-const shareUrlProvider = async () => {
-  // Call your server to get a new share url and return that url.
-}
-
-await startYotiModalShare({
-  clientSdkId: SDK_ID,
+await createYotiWebShare({
+  name: 'demo',
+  sdkId: SDK_ID,
   domId: DOM_ID,
-  controls: {
-    shareUrlProvider,
-  },
-  options: {
-    skin: 'digital-id-uk',
-    button: {
-      width: 'full',
-    },
+  flow: 'MODAL',
+  hooks: {
+    sessionIdResolver: () => Promise.resolve('some-session-id'),
   },
 })
 ```
@@ -46,8 +38,10 @@ The library exposes 3 methods
 import { loadClient, startYotiModalShare, startYotiInlineShare } from '../lib/main'
 ```
 
-| Method                      | Description                                                                 |
-| --------------------------- | --------------------------------------------------------------------------- |
-| loadClient()                | Utility method, loads the Yoti share client once only                       |
-| startYotiModalShare({...})  | Loads the share client if not present and then render the **modal** element |
-| startYotiInlineShare({...}) | Same as `startYotiModalShare` but for the **inline** element                |
+| Method                        | Description                                                                                                 |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| loadClient()                  | Utility method, loads the Yoti share client once only (automatically called by `createYotiWebShare({...})`) |
+| createYotiWebShare({...})     | Create a Yoti WebShare instance, ready to be used                                                           |
+| getYotiWebShareByName({...})  | Returns the Yoti WebShare corresponding to the name if exists                                               |
+| getYotiWebShareByDomId({...}) | Returns the Yoti WebShare corresponding to the DOM ID if exists                                             |
+| getDetectedDeviceType({...})  | Returns the device detected (currently 'desktop'/'mobile')                                                  |

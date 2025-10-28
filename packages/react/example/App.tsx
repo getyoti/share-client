@@ -1,71 +1,37 @@
 import { useState } from 'react'
 
-import {
-  InlineYotiShare,
-  ModalYotiShare,
-  ModalYotiShareWithScenario,
-  InlineYotiShareWithScenario,
-} from './../lib/main.ts'
-import { Button } from './components/Button.tsx'
+import HomePage from './HomePage'
+import ModalPage from './ModalPage'
+import ContextPage from './ContextPage'
+import { Button } from './components/Button'
 
 import './App.css'
 
-const SDK_ID = '60f98bf7-0da7-4484-aa64-5a753dd502e0'
-const SCENARIO_ID = '3f7158bc-4554-47d9-ade6-f35e3fbb4bf2'
+const Pages = ['home', 'modal', 'context'] as const
 
-const dummyShareUrlProvider = () => {
-  return Promise.resolve(`https://code.yoti.com/some-code-${Date.now()}`)
-}
+type Page = (typeof Pages)[number]
+
+const defaultPage: Page = 'context'
 
 function App() {
-  const [yotiShareExample, setYotiShareExample] = useState<
-    'inline' | 'inline-scenario' | 'modal' | 'modal-scenario'
-  >()
+  const [page, setPage] = useState<Page>(defaultPage)
 
   return (
     <>
-      <h1>Welcome!</h1>
-      <p>Click on one of the case:</p>
+      <nav>
+        {Pages.map((page) => (
+          <Button
+            key={page}
+            size="small"
+            onClick={() => setPage(page)}>
+            {page}
+          </Button>
+        ))}
+      </nav>
 
-      <div className="buttons">
-        <Button onClick={() => setYotiShareExample('inline')}>Show Inline</Button>
-        <Button onClick={() => setYotiShareExample('inline-scenario')}>
-          Show Inline with Scenario
-        </Button>
-        <Button onClick={() => setYotiShareExample('modal')}>Show Modal</Button>
-        <Button onClick={() => setYotiShareExample('modal-scenario')}>
-          Show Modal with Scenario
-        </Button>
-      </div>
-
-      {yotiShareExample === 'inline' && (
-        <InlineYotiShare
-          sdkId={SDK_ID}
-          onShareUrlAwaited={dummyShareUrlProvider}
-          skinId="digital-id-uk"
-        />
-      )}
-      {yotiShareExample === 'inline-scenario' && (
-        <InlineYotiShareWithScenario
-          sdkId={SDK_ID}
-          scenarioId={SCENARIO_ID}
-          skinId="yoti"
-        />
-      )}
-      {yotiShareExample === 'modal' && (
-        <ModalYotiShare
-          sdkId={SDK_ID}
-          onShareUrlAwaited={dummyShareUrlProvider}
-          skinId="digital-id-uk"
-        />
-      )}
-      {yotiShareExample === 'modal-scenario' && (
-        <ModalYotiShareWithScenario
-          sdkId={SDK_ID}
-          scenarioId={SCENARIO_ID}
-          skinId="yoti"
-        />
-      )}
+      {page === 'home' && <HomePage />}
+      {page === 'modal' && <ModalPage />}
+      {page === 'context' && <ContextPage />}
     </>
   )
 }
