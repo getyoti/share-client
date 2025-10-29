@@ -1,6 +1,6 @@
 {
   "name": "@getyoti/share-client-core",
-  "version": "0.0.1-beta.2",
+  "version": "2.0.0-alpha.0",
   "author": "Yoti LTD <tech@yoti.com> (https://www.yoti.com/developers)",
   "license": "MIT",
   "repository": {
@@ -29,10 +29,10 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
-    "@getyoti/share-client-types": "^0.0.1-beta.2"
+    "@getyoti/share-client-types": "^2.0.0-alpha.0"
   },
   "devDependencies": {
-    "@getyoti/share-client-lint-config": "^0.0.1-beta.2",
+    "@getyoti/share-client-lint-config": "^2.0.0-alpha.0",
     "@types/node": "20.17.46",
     "jsdom": "26.1.0",
     "lint-staged": "16.0.0",
